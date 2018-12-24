@@ -10,7 +10,8 @@ import '../css/main.scss'
 
 export const supportedLanguages = {
   'en': 'English',
-  'ja': 'Japanese'
+  'ja': 'Japanese',
+  'zh-Hans': '简体中文'
 }
 
 const acceptLanguage = AcceptLanguage.create()
@@ -31,6 +32,9 @@ async function loadSource (language) {
         break
       case 'ja':
         ({ default: source } = await import('../../markdown/ja.md'))
+        break
+      case 'zh-Hans':
+        ({ default: source } = await import('../../markdown/zh-Hans.md'))
         break
       default:
         throw new Error(`Unsupported language: ${language}`)
@@ -73,4 +77,5 @@ if (module.hot) {
   // Same discussion above
   module.hot.accept('../../markdown/en.md', callback)
   module.hot.accept('../../markdown/ja.md', callback)
+  module.hot.accept('../../markdown/zh-Hans.md', callback)
 }
